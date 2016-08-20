@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <canvas id='canvas' width='1000px' height='1000px' ></canvas>
+    </body>
+    <script>
+        //得到数据，颜色
+       var data=[
+           {value:30,color:'red'},
+           {value:80,color:'blue'},
+           {value:100,color:'yellow'},
+           {value:70,color:'black'}
+       ];
+       //得到画布对象
+       var canvas=document.getElementById('canvas');
+       var context=canvas.getContext('2d');
+       //计算每个色块%比
+       var total=0;
+       for(var i=0;i<data.length;i++){
+          total+=data[i]['value']; 
+       }
+       for(var i=0;i<data.length;i++){
+          data[i].angle=(data[i]['value']/total)*Math.PI*2; 
+       }
+       var start=-Math.PI/2;
+       for(var i=0;i<data.length;i++){
+          context.fillStyle=data[i]['color'];
+          context.beginPath();
+          context.lineTo(300,300);
+          context.arc(300,300,200,start,start+data[i].angle);
+          context.fill();
+          start+=data[i].angle;
+       }
+    </script>
+</html>
